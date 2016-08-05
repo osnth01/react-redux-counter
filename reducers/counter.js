@@ -1,8 +1,8 @@
 const counter = (currentCount = 0, action) => {
-  switch(action) {
-    case 'UP':
+  switch(action.type) {
+    case 'INCREMENT':
       return currentCount + 1
-    case 'DOWN':
+    case 'DECREMENT':
       return currentCount - 1
     default:
       return currentCount

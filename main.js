@@ -1,15 +1,21 @@
 import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
+import { createStore } from 'redux'
+import Counter from './components/Counter'
+import counter from './reducers/counter'
 
-class Counter extends Component {
-  render() {
-    return (
-      <h1>Hi</h1>
-    )
-  }
+const store = createStore(counter)
+
+function render() {
+  ReactDOM.render(
+    <Counter 
+      value={store.getState()}
+      onIncrement={() => store.dispatch({ type: 'INCREMENT' })}
+      onDecrement={() => store.dispatch({ type: 'DECREMENT' })} />,
+    document.getElementById('root')
+  )
 }
 
-ReactDOM.render(
-  <Counter />,
-  document.getElementById('root')
-)
+render();
+
+store.subscribe(render)
